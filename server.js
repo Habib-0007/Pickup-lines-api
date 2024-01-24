@@ -1,26 +1,26 @@
 const express = require("express");
-const fs = require("fs/promises");
-
+const fs = require("fs");
 const app = express();
+
 const PORT = 3000;
 
-app.get("/api/data", async (req, res) => {
-	try {
-		// Read the JSON file
-		const jsonData = await fs.readFile("pickup_lines.json", "utf-8");
-
-		// Parse JSON data
-		const parsedData = JSON.parse(jsonData);
-
-		// Send the data as a response
-		res.json(parsedData);
-	} catch (error) {
-		console.error("Error reading JSON file:", error);
-		res.status(500).json({ error: "Internal Server Error" });
-	}
+app.get("/data", (req, res) => {
+	fs.readFile("pickup_lines.json", "utf8", (err, data) => {
+		if (err) {
+			console.error(`Error reading file from disk: ${err}`);
+			res.status(500).send({ error: err.message });
+			return;
+		}
+		try {
+			const parsedData = JSON.parse(data);
+			res.send(parsedData);
+		} catch (err) {
+			console.error(`Error parsing JSON string: ${err}`);
+			res.status(500).send({ error: err.message });
+		}
+	});
 });
 
-// Start the server
 app.listen(PORT, () => {
-	console.log(`Server is running on http://localhost:${PORT}`);
+	console.log(`Server listening on port ${PORT}`);
 });
