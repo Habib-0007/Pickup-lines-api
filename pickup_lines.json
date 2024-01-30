@@ -1,5 +1,4 @@
-{ 
-  "pickups": [
+  [
     {
         "pickup": "Are you religious? ‘Cause you’re the answer to all my prayers"
     },
@@ -383,5 +382,4 @@
     {
         "pickup": "I wish I’d paid more attention to science in high school, because you and I’ve got chemistry and I want to know all about it"
     }
-    
-]}
+]
