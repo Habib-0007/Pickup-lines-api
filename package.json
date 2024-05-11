@@ -1,5 +1,5 @@
 {
-  "name": "pickup_line_api",
+  "name": "pickup_lines_api",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",

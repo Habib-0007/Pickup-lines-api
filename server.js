@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const fs = require("fs");
+const path = require("path");
 const serverless = require("serverless-http");
 
 const app = express();
@@ -11,13 +12,18 @@ const port = process.env.PORT || 5001;
 
 app.use(express.json());
 
+const filePath = path.join(
+	__dirname,
+	"pickup_lines.json"
+);
+
 router.get("/pickups", (req, res) => {
 	res.set(
 		"Access-Control-Allow-Origin",
 		"*"
 	);
 	fs.readFile(
-		"pickup_lines.json",
+		filePath,
 		"utf8",
 		(err, data) => {
 			if (err) {
@@ -53,7 +59,7 @@ router.get(
 			"*"
 		);
 		fs.readFile(
-			"pickup_lines.json",
+			filePath,
 			"utf8",
 			(err, data) => {
 				if (err) {
